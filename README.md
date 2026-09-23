@@ -20,9 +20,10 @@ supported by this pinned set.
 | `mitsuba` | 3.8.0 | scene geometry, drone meshes |
 | `drjit` | 1.3.1 | Mitsuba JIT backend |
 | `hermespy` | 1.6.0 | OFDM modem, beamforming, radar (`OFDMRadar`, `FMCW`) |
-| `tensorflow` | 2.21.0 | Sionna RT tensor backend |
+| `tensorflow[and-cuda]` | 2.20.0 | Sionna RT tensor backend with CUDA compatibility |
 | `tensorflow-probability` | 0.25.0 | non-integer path subdivisions in `sim.build_rx_path()` |
 | `keras` | 3.14.1 | TensorFlow dependency |
+| `tf-keras`| 2.20.1 | TensorFlow dependency |
 | `numpy` | 2.4.6 | array math throughout |
 | `scipy` | 1.17.1 | detection/estimation helpers |
 | `pandas` | 3.0.5 | Monte-Carlo KPI tables |
@@ -39,15 +40,18 @@ source venv/bin/activate
 pip install --upgrade pip
 
 pip install "sionna==2.0.1" "sionna-rt==2.0.1" "mitsuba==3.8.0" "drjit==1.3.1" \
-            "hermespy==1.6.0" "tensorflow==2.21.0" "tensorflow-probability==0.25.0" \
+            "hermespy==1.6.0" "tensorflow==2.20.0" "tensorflow-probability==0.25.0" \
             "keras==3.14.1" "numpy==2.4.6" "scipy==1.17.1" "pandas==3.0.5" \
             "matplotlib==3.10.9" "typing_extensions==4.15.0" \
-            "jupyterlab==4.5.7" "ipykernel==7.2.0"
+            "jupyterlab==4.5.7" "ipykernel==7.2.0" "tf-keras==2.20.1"
 ```
 
 `tensorflow-probability` is optional: only the non-integer-subdivision branch of
 `build_rx_path()` needs it, and its absence raises with an install hint instead of
 breaking the import.
+
+If running on a WSL 2 system, [follow these steps to make Mitsuba work with NVidia drivers](https://github.com/mitsuba-renderer/mitsuba3/blob/master/docs/src/optix_setup.rst?utm_source=chatgpt.com).
+
 
 ## Layout
 
