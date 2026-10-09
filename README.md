@@ -21,10 +21,11 @@ dependency also ships 3.12 and 3.13 wheels, but those versions are untested.
 | `mitsuba` | 3.8.0 | scene geometry, drone meshes |
 | `drjit` | 1.3.1 | Mitsuba JIT backend |
 | `hermespy` | 1.6.0 | OFDM modem, beamforming, radar (`OFDMRadar`, `FMCW`) |
-| `tensorflow` | 2.21.0 | tensors in `sim.build_rx_path()` and the notebooks |
+| `tensorflow[and-cuda]` | 2.20.0 | Sionna RT tensor backend with CUDA compatibility |
 | `tensorflow-probability` | 0.25.0 | non-integer path subdivisions in `sim.build_rx_path()` |
 | `tf_keras` | 2.21.0 | required by `tensorflow-probability` under Keras 3 |
 | `keras` | 3.14.1 | TensorFlow dependency |
+| `tf-keras`| 2.20.1 | TensorFlow dependency |
 | `numpy` | 2.4.6 | array math throughout |
 | `scipy` | 1.17.1 | detection/estimation helpers |
 | `pandas` | 3.0.5 | Monte-Carlo KPI tables |
@@ -55,10 +56,13 @@ cannot resolve the two together. It would also pull in PyTorch for `sionna.phy`.
 `build_rx_path()` needs it, and its absence raises with an install hint instead of
 breaking the import. Without `tf_keras` it fails to import and is reported as missing.
 
+If running on a WSL 2 system, [follow these steps to make Mitsuba work with NVidia drivers](https://github.com/mitsuba-renderer/mitsuba3/blob/master/docs/src/optix_setup.rst?utm_source=chatgpt.com).
+
 Without an NVIDIA GPU, Mitsuba runs on Dr.Jit's CPU backend, which needs LLVM installed
 on the system (e.g. `apt install llvm`, `brew install llvm`). Plain `tensorflow` is
 CPU-only on Linux, which is all this project needs; a GPU build reserves several GB of GPU
 memory the ray tracer could otherwise use.
+
 
 ## Layout
 
